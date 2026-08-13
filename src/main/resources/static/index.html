@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Fare Extractor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator_semanticui.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <div class="logo">
+                <i class='bx bxs-receipt'></i>
+                <h1>Fare Extractor</h1>
+            </div>
+            <p>Upload your AVC Template (.xlsx) and Fare Chart (PDF/Image) to extract and map fares.</p>
+        </header>
+
+        <section class="upload-section">
+            <div class="drop-zone" id="excel-drop-zone">
+                <i class='bx bxs-file-blank'></i>
+                <h3>1. AVC Template</h3>
+                <p>Upload Excel (.xlsx / .xls)</p>
+                <input type="file" id="excel-file" accept=".xlsx, .xls" hidden>
+                <span class="file-status" id="excel-status">No file selected</span>
+            </div>
+
+            <div class="drop-zone" id="pdf-drop-zone">
+                <i class='bx bxs-file-pdf'></i>
+                <h3>2. Fare Chart</h3>
+                <p>Upload PDF or Image</p>
+                <input type="file" id="pdf-file" accept=".pdf, .png, .jpg, .jpeg" hidden>
+                <span class="file-status" id="pdf-status">No file selected</span>
+            </div>
+        </section>
+
+        <div class="action-bar">
+            <button id="process-btn" class="btn-primary" disabled>
+                <i class='bx bx-brain'></i> Extract & Map Fares
+            </button>
+        </div>
+
+        <section class="results-section hidden" id="results-section">
+            <div class="results-header">
+                <div class="results-title">
+                    <h2>Extracted Fares</h2>
+                    <p class="plaza-info" id="plaza-info"></p>
+                    <p class="disclaimer-text">⚠️ Kindly validate the fare before sharing.</p>
+                </div>
+                <div class="actions" style="display: flex; gap: 0.75rem;">
+                    <button id="download-btn" class="btn-success">
+                        <i class='bx bx-cloud-download'></i> Download Excel
+                    </button>
+                    <button id="download-csv-btn" class="btn-primary">
+                        <i class='bx bx-file'></i> Download CSV
+                    </button>
+                </div>
+            </div>
+            <div id="data-grid"></div>
+        </section>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loading-overlay">
+        <div class="spinner"></div>
+        <h3 id="loading-text">Extracting Fares...</h3>
+        <p>AI is reading your fare chart and mapping to your AVC template.</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
+    <script src="script.js?v=8"></script>
+</body>
+</html>

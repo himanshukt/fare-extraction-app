@@ -1,0 +1,355 @@
+:root {
+    --primary: #4F46E5;
+    --primary-hover: #4338CA;
+    --success: #10B981;
+    --success-hover: #059669;
+    --bg-color: #0F172A;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Background Orbs for Glassmorphism */
+.background-orbs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.5;
+}
+
+.orb-1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: #4F46E5;
+    animation: float 15s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 40vw;
+    height: 40vw;
+    background: #0EA5E9;
+    animation: float 20s ease-in-out infinite alternate-reverse;
+}
+
+.orb-3 {
+    top: 40%;
+    left: 60%;
+    width: 30vw;
+    height: 30vw;
+    background: #8B5CF6;
+    animation: float 18s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(30px, 50px) scale(1.1); }
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.logo i {
+    font-size: 3rem;
+    color: var(--primary);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #4F46E5, #0EA5E9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Upload Section */
+.upload-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.drop-zone {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 2px dashed var(--border-color);
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.drop-zone:hover, .drop-zone.dragover {
+    border-color: var(--primary);
+    background: rgba(79, 70, 229, 0.1);
+    transform: translateY(-5px);
+}
+
+.drop-zone i {
+    font-size: 4rem;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+.drop-zone:hover i {
+    color: var(--primary);
+}
+
+.drop-zone h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.drop-zone p {
+    color: var(--text-secondary);
+}
+
+.file-status {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--success);
+    font-weight: 500;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    display: none; /* Shown via JS */
+}
+
+/* Action Bar */
+.action-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+button {
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
+}
+
+.btn-success:hover {
+    background: var(--success-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* Results Section */
+.results-section {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    animation: slideUp 0.5s ease;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.results-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.disclaimer-text {
+    font-size: 0.9rem;
+    color: #FBBF24; /* Amber warning color */
+    font-weight: 500;
+}
+
+.plaza-info {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 2rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Tabulator Custom Overrides for Spreadsheet Look */
+.tabulator {
+    background-color: #ffffff !important;
+    border: 1px solid #ccc !important;
+    border-radius: 0;
+    color: #333 !important;
+    font-family: Arial, sans-serif !important;
+}
+
+.tabulator-header {
+    background-color: #f3f3f3 !important;
+    color: #333 !important;
+    border-bottom: 2px solid #ccc !important;
+    font-weight: bold !important;
+}
+
+.tabulator-col {
+    border-right: 1px solid #ccc !important;
+    background-color: #f3f3f3 !important;
+}
+
+.tabulator-row {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #ccc !important;
+    color: #333 !important;
+}
+
+.tabulator-row:nth-child(even) {
+    background-color: #fafafa !important;
+}
+
+.tabulator-row:hover {
+    background-color: #e8f4fd !important; /* Light blue highlight like Excel */
+}
+
+.tabulator-cell {
+    border-right: 1px solid #ccc !important;
+    padding: 8px !important;
+}
+
+/* Style edited cells */
+.tabulator-cell.tabulator-editing {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 2px solid #4F46E5 !important;
+    padding: 6px !important; /* adjust for border */
+}
+
+/* Fix input text color when editing */
+.tabulator-cell input {
+    color: #000 !important;
+    font-family: Arial, sans-serif !important;
+}
