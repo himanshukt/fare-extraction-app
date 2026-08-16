@@ -21,9 +21,10 @@ COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 
 # Set standard JVM options for memory management (especially useful for PDFBox)
-# -Xmx2g: Sets the maximum heap size to 2GB to prevent OutOfMemoryErrors
-# -Xms512m: Sets the initial heap size to 512MB
-ENV JAVA_OPTS="-Xmx2g -Xms256m -XX:+UseG1GC"
+# -Xmx512m: Sets the maximum heap size to 512MB
+# -Xms128m: Sets the initial heap size to 128MB
+ENV JAVA_OPTS="-Xmx512m -Xms128m -XX:MaxMetaspaceSize=128m -Xss256k -XX:+UseG1GC"
 
 # Run the application
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+
