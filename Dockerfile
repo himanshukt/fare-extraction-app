@@ -20,5 +20,10 @@ COPY --from=build /app/target/*.jar app.jar
 # Expose the default Spring Boot port
 EXPOSE 8080
 
+# Set standard JVM options for memory management (especially useful for PDFBox)
+# -Xmx2g: Sets the maximum heap size to 2GB to prevent OutOfMemoryErrors
+# -Xms512m: Sets the initial heap size to 512MB
+ENV JAVA_OPTS="-Xmx2g -Xms256m -XX:+UseG1GC"
+
 # Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
