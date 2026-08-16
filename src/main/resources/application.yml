@@ -23,7 +23,7 @@ fare:
     medium-confidence-threshold: 0.70
     max-ai-retries: 1
     max-pdf-pages: 5
-    image-render-dpi: 150
+    image-render-dpi: 72
     supported-mime-types:
       - application/pdf
       - image/jpeg
